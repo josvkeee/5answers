@@ -29,10 +29,21 @@ def IndexView(page:ft.Page, params):
         page.go("/simple_view")
 
     appbar = CreateAppBar()
+    question_data = {"question" : "Name five largest countries",
+                "answer" : ["Russia", "China", "USA", "Canada", "Brazil"]}
+    question_tb=ft.Text(value=question_data["question"], size=24)
+    answer_column=ft.Column()
+    i=1
+    for answer in question_data["answer"]:
+        number=ft.Text(value=i)
+        a = ft.Text(value=answer)
+        row=ft.Row(controls=[number,a])
+        answer_column.controls.append(row)
+        i+=1
 
     page.views.append(ft.View(
         "/",
-        [appbar,],
+        [appbar, question_tb, answer_column],
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
 
     )
